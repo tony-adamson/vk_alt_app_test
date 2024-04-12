@@ -8,14 +8,22 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var vm = LoginViewModel()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        if !vm.authenticated {
+            LoginView(vm: vm)
+        } else {
+            VStack {
+                Text("Hello username")
+                    .font(.largeTitle)
+                Button("Log out") {
+                    vm.logOut()
+                }
+                .buttonStyle(.bordered)
+                .foregroundStyle(.red)
+            }
         }
-        .padding()
     }
 }
 
