@@ -16,6 +16,17 @@
 		020256BE2BC905210016DFCC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256BD2BC905210016DFCC /* LoginViewModel.swift */; };
 		020256C02BC924AB0016DFCC /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256BF2BC924AB0016DFCC /* ButtonView.swift */; };
 		020256C32BC924FB0016DFCC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C22BC924FB0016DFCC /* Helpers.swift */; };
+		020256C52BC9434D0016DFCC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C42BC9434D0016DFCC /* MainView.swift */; };
+		020256C72BC9441A0016DFCC /* PostItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C62BC944190016DFCC /* PostItemView.swift */; };
+		020256C92BCAA3BE0016DFCC /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C82BCAA3BE0016DFCC /* WebView.swift */; };
+		020256CB2BCBB6520016DFCC /* FriendItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256CA2BCBB6520016DFCC /* FriendItemView.swift */; };
+		020256CD2BCBB77A0016DFCC /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256CC2BCBB77A0016DFCC /* Model.swift */; };
+		020256CF2BCBB9700016DFCC /* FriendsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256CE2BCBB9700016DFCC /* FriendsViewModel.swift */; };
+		020256D22BCBBB330016DFCC /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 020256D12BCBBB330016DFCC /* Alamofire */; };
+		020256D42BCBBB330016DFCC /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 020256D32BCBBB330016DFCC /* AlamofireDynamic */; };
+		020256D72BCBF2D70016DFCC /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 020256D62BCBF2D70016DFCC /* SDWebImage */; };
+		020256D92BCBF2D70016DFCC /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 020256D82BCBF2D70016DFCC /* SDWebImageMapKit */; };
+		020256DC2BCBF31D0016DFCC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 020256DB2BCBF31D0016DFCC /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +40,12 @@
 		020256BD2BC905210016DFCC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		020256BF2BC924AB0016DFCC /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		020256C22BC924FB0016DFCC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		020256C42BC9434D0016DFCC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		020256C62BC944190016DFCC /* PostItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostItemView.swift; sourceTree = "<group>"; };
+		020256C82BCAA3BE0016DFCC /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		020256CA2BCBB6520016DFCC /* FriendItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendItemView.swift; sourceTree = "<group>"; };
+		020256CC2BCBB77A0016DFCC /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		020256CE2BCBB9700016DFCC /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +53,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				020256DC2BCBF31D0016DFCC /* SDWebImageSwiftUI in Frameworks */,
+				020256D72BCBF2D70016DFCC /* SDWebImage in Frameworks */,
+				020256D22BCBBB330016DFCC /* Alamofire in Frameworks */,
+				020256D92BCBF2D70016DFCC /* SDWebImageMapKit in Frameworks */,
+				020256D42BCBBB330016DFCC /* AlamofireDynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				020256BB2BC904DD0016DFCC /* User.swift */,
+				020256CC2BCBB77A0016DFCC /* Model.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -94,6 +117,9 @@
 			children = (
 				020256B92BC900150016DFCC /* LoginView.swift */,
 				020256BF2BC924AB0016DFCC /* ButtonView.swift */,
+				020256C42BC9434D0016DFCC /* MainView.swift */,
+				020256C62BC944190016DFCC /* PostItemView.swift */,
+				020256CA2BCBB6520016DFCC /* FriendItemView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -102,6 +128,8 @@
 			isa = PBXGroup;
 			children = (
 				020256BD2BC905210016DFCC /* LoginViewModel.swift */,
+				020256C82BCAA3BE0016DFCC /* WebView.swift */,
+				020256CE2BCBB9700016DFCC /* FriendsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -130,6 +158,13 @@
 			dependencies = (
 			);
 			name = vk_alt_app_test;
+			packageProductDependencies = (
+				020256D12BCBBB330016DFCC /* Alamofire */,
+				020256D32BCBBB330016DFCC /* AlamofireDynamic */,
+				020256D62BCBF2D70016DFCC /* SDWebImage */,
+				020256D82BCBF2D70016DFCC /* SDWebImageMapKit */,
+				020256DB2BCBF31D0016DFCC /* SDWebImageSwiftUI */,
+			);
 			productName = vk_alt_app_test;
 			productReference = 020256A52BC8FF550016DFCC /* vk_alt_app_test.app */;
 			productType = "com.apple.product-type.application";
@@ -158,6 +193,11 @@
 				Base,
 			);
 			mainGroup = 0202569C2BC8FF550016DFCC;
+			packageReferences = (
+				020256D02BCBBB330016DFCC /* XCRemoteSwiftPackageReference "Alamofire" */,
+				020256D52BCBF2D70016DFCC /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				020256DA2BCBF31D0016DFCC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+			);
 			productRefGroup = 020256A62BC8FF550016DFCC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -185,12 +225,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				020256BC2BC904DD0016DFCC /* User.swift in Sources */,
+				020256C92BCAA3BE0016DFCC /* WebView.swift in Sources */,
+				020256C52BC9434D0016DFCC /* MainView.swift in Sources */,
+				020256CD2BCBB77A0016DFCC /* Model.swift in Sources */,
 				020256C32BC924FB0016DFCC /* Helpers.swift in Sources */,
 				020256BA2BC900150016DFCC /* LoginView.swift in Sources */,
 				020256C02BC924AB0016DFCC /* ButtonView.swift in Sources */,
 				020256AB2BC8FF550016DFCC /* ContentView.swift in Sources */,
 				020256BE2BC905210016DFCC /* LoginViewModel.swift in Sources */,
+				020256C72BC9441A0016DFCC /* PostItemView.swift in Sources */,
 				020256A92BC8FF550016DFCC /* vk_alt_app_testApp.swift in Sources */,
+				020256CF2BCBB9700016DFCC /* FriendsViewModel.swift in Sources */,
+				020256CB2BCBB6520016DFCC /* FriendItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,6 +442,61 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		020256D02BCBBB330016DFCC /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire?tab=readme-ov-file#swift-package-manager";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
+		020256D52BCBF2D70016DFCC /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.19.1;
+			};
+		};
+		020256DA2BCBF31D0016DFCC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		020256D12BCBBB330016DFCC /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 020256D02BCBBB330016DFCC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		020256D32BCBBB330016DFCC /* AlamofireDynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 020256D02BCBBB330016DFCC /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = AlamofireDynamic;
+		};
+		020256D62BCBF2D70016DFCC /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 020256D52BCBF2D70016DFCC /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		020256D82BCBF2D70016DFCC /* SDWebImageMapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 020256D52BCBF2D70016DFCC /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImageMapKit;
+		};
+		020256DB2BCBF31D0016DFCC /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 020256DA2BCBF31D0016DFCC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0202569D2BC8FF550016DFCC /* Project object */;
 }
