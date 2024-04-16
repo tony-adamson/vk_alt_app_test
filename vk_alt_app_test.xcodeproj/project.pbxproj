@@ -12,9 +12,7 @@
 		020256AD2BC8FF570016DFCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020256AC2BC8FF570016DFCC /* Assets.xcassets */; };
 		020256B02BC8FF570016DFCC /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 020256AF2BC8FF570016DFCC /* Preview Assets.xcassets */; };
 		020256BA2BC900150016DFCC /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256B92BC900150016DFCC /* LoginView.swift */; };
-		020256BC2BC904DD0016DFCC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256BB2BC904DD0016DFCC /* User.swift */; };
 		020256BE2BC905210016DFCC /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256BD2BC905210016DFCC /* LoginViewModel.swift */; };
-		020256C02BC924AB0016DFCC /* ButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256BF2BC924AB0016DFCC /* ButtonView.swift */; };
 		020256C32BC924FB0016DFCC /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C22BC924FB0016DFCC /* Helpers.swift */; };
 		020256C52BC9434D0016DFCC /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C42BC9434D0016DFCC /* MainView.swift */; };
 		020256C72BC9441A0016DFCC /* NewsItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256C62BC944190016DFCC /* NewsItemView.swift */; };
@@ -27,11 +25,12 @@
 		020256D72BCBF2D70016DFCC /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 020256D62BCBF2D70016DFCC /* SDWebImage */; };
 		020256D92BCBF2D70016DFCC /* SDWebImageMapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 020256D82BCBF2D70016DFCC /* SDWebImageMapKit */; };
 		020256DC2BCBF31D0016DFCC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 020256DB2BCBF31D0016DFCC /* SDWebImageSwiftUI */; };
-		020256DE2BCD253A0016DFCC /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256DD2BCD253A0016DFCC /* TabBar.swift */; };
 		020256E02BCD281B0016DFCC /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256DF2BCD281B0016DFCC /* NewsViewModel.swift */; };
 		020256E22BCD284C0016DFCC /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256E12BCD284C0016DFCC /* NewsModel.swift */; };
 		020256E52BCD720D0016DFCC /* VKID in Frameworks */ = {isa = PBXBuildFile; productRef = 020256E42BCD720D0016DFCC /* VKID */; };
 		020256E72BCD720D0016DFCC /* VKIDCore in Frameworks */ = {isa = PBXBuildFile; productRef = 020256E62BCD720D0016DFCC /* VKIDCore */; };
+		020256EC2BCE77AC0016DFCC /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256EB2BCE77AC0016DFCC /* FriendsView.swift */; };
+		020256EE2BCE78D30016DFCC /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256ED2BCE78D30016DFCC /* NewsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,9 +40,7 @@
 		020256AC2BC8FF570016DFCC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		020256AF2BC8FF570016DFCC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		020256B92BC900150016DFCC /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		020256BB2BC904DD0016DFCC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		020256BD2BC905210016DFCC /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		020256BF2BC924AB0016DFCC /* ButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonView.swift; sourceTree = "<group>"; };
 		020256C22BC924FB0016DFCC /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		020256C42BC9434D0016DFCC /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		020256C62BC944190016DFCC /* NewsItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemView.swift; sourceTree = "<group>"; };
@@ -51,9 +48,10 @@
 		020256CA2BCBB6520016DFCC /* FriendItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendItemView.swift; sourceTree = "<group>"; };
 		020256CC2BCBB77A0016DFCC /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		020256CE2BCBB9700016DFCC /* FriendsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewModel.swift; sourceTree = "<group>"; };
-		020256DD2BCD253A0016DFCC /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		020256DF2BCD281B0016DFCC /* NewsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewModel.swift; sourceTree = "<group>"; };
 		020256E12BCD284C0016DFCC /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
+		020256EB2BCE77AC0016DFCC /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
+		020256ED2BCE78D30016DFCC /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,7 +114,6 @@
 		020256B62BC8FFD60016DFCC /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				020256BB2BC904DD0016DFCC /* User.swift */,
 				020256CC2BCBB77A0016DFCC /* FriendsModel.swift */,
 				020256E12BCD284C0016DFCC /* NewsModel.swift */,
 			);
@@ -126,12 +123,11 @@
 		020256B72BC8FFEE0016DFCC /* View */ = {
 			isa = PBXGroup;
 			children = (
-				020256B92BC900150016DFCC /* LoginView.swift */,
-				020256BF2BC924AB0016DFCC /* ButtonView.swift */,
 				020256C42BC9434D0016DFCC /* MainView.swift */,
-				020256C62BC944190016DFCC /* NewsItemView.swift */,
-				020256CA2BCBB6520016DFCC /* FriendItemView.swift */,
-				020256DD2BCD253A0016DFCC /* TabBar.swift */,
+				020256ED2BCE78D30016DFCC /* NewsView.swift */,
+				020256EB2BCE77AC0016DFCC /* FriendsView.swift */,
+				020256B92BC900150016DFCC /* LoginView.swift */,
+				020256EA2BCE772F0016DFCC /* Subview */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,6 +149,15 @@
 				020256C22BC924FB0016DFCC /* Helpers.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		020256EA2BCE772F0016DFCC /* Subview */ = {
+			isa = PBXGroup;
+			children = (
+				020256CA2BCBB6520016DFCC /* FriendItemView.swift */,
+				020256C62BC944190016DFCC /* NewsItemView.swift */,
+			);
+			path = Subview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,14 +245,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				020256BC2BC904DD0016DFCC /* User.swift in Sources */,
+				020256EC2BCE77AC0016DFCC /* FriendsView.swift in Sources */,
 				020256C92BCAA3BE0016DFCC /* WebView.swift in Sources */,
 				020256E22BCD284C0016DFCC /* NewsModel.swift in Sources */,
+				020256EE2BCE78D30016DFCC /* NewsView.swift in Sources */,
 				020256C52BC9434D0016DFCC /* MainView.swift in Sources */,
 				020256CD2BCBB77A0016DFCC /* FriendsModel.swift in Sources */,
 				020256C32BC924FB0016DFCC /* Helpers.swift in Sources */,
 				020256BA2BC900150016DFCC /* LoginView.swift in Sources */,
-				020256C02BC924AB0016DFCC /* ButtonView.swift in Sources */,
 				020256E02BCD281B0016DFCC /* NewsViewModel.swift in Sources */,
 				020256AB2BC8FF550016DFCC /* ContentView.swift in Sources */,
 				020256BE2BC905210016DFCC /* LoginViewModel.swift in Sources */,
@@ -255,7 +260,6 @@
 				020256A92BC8FF550016DFCC /* vk_alt_app_testApp.swift in Sources */,
 				020256CF2BCBB9700016DFCC /* FriendsViewModel.swift in Sources */,
 				020256CB2BCBB6520016DFCC /* FriendItemView.swift in Sources */,
-				020256DE2BCD253A0016DFCC /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

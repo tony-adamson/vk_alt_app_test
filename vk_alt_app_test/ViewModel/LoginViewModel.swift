@@ -5,13 +5,16 @@
 //  Created by Антон Адамсон on 12.04.2024.
 //
 
-import UIKit
+import Foundation
+import Observation
+import SwiftUI
 
-class LoginViewModel: ObservableObject {
+@Observable
+class LoginViewModel {
     
-    @Published var isLogin = false
+    var isLogin = false
     
-    @Published var token = "" {
+    var token = "" {
         didSet {
             isLogin = true
         }

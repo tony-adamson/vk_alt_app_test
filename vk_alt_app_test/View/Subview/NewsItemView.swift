@@ -26,6 +26,6 @@ struct NewsItemView: View {
     }
 }
 
-#Preview {
-    NewsItemView(text: "123")
-}
+//#Preview {
+//    NewsItemView(text: "123")
+//}
