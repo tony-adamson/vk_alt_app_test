@@ -43,14 +43,15 @@ struct MainView: View {
                     
                     // Вторая вкладка с новостями
                     ZStack {
-                        Text("123")
-//                        ScrollView(.vertical) {
-//                            LazyVStack {
-//                                ForEach(news, id: \.self) { news in
-//                                    NewsItemView(text: news.text)
-//                                }
-//                            }
-//                        }
+                        //Text("123")
+                        ScrollView(.vertical) {
+                            LazyVStack {
+                                ForEach(news, id:\.id) { newsItem in
+                                    NewsItemView(text: newsItem.text)
+                                    
+                                }
+                            }
+                        }
                     }
                     .tag(1)
                     .onAppear {

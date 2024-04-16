@@ -19,10 +19,11 @@ struct NewsItemView: View {
             Text(text)
                 .padding([.bottom, .leading, .trailing], 16)
         }
+        .frame(maxWidth: .infinity)
         .background(.green)
     }
 }
 
-//#Preview {
-//    NewsItemView(text: "123")
-//}
+#Preview {
+    NewsItemView(text: "123")
+}
