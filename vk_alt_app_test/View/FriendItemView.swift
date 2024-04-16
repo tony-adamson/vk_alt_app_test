@@ -28,6 +28,8 @@ struct FriendItemView: View {
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.tint)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         .padding(.bottom, 10)
     }
 }

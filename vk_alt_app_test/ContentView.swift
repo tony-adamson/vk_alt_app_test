@@ -9,16 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @ObservedObject var lvm = LoginViewModel()
-//    @State private var vm = LoginViewModel()
     
     var body: some View {
-        //        if !vm.authenticated {
-        //            LoginView(vm: vm)
         LoginView()
             .ignoresSafeArea(.all)
-//        } else {
-//            MainView()
-//        }
     }
 }
 

@@ -20,7 +20,9 @@ struct NewsItemView: View {
                 .padding([.bottom, .leading, .trailing], 16)
         }
         .frame(maxWidth: .infinity)
-        .background(.green)
+        .background(.tint)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .padding(.horizontal, 16)
     }
 }
 

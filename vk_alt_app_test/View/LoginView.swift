@@ -9,15 +9,16 @@ import SwiftUI
 
 struct LoginView: View {
 //    @Bindable var vm: LoginViewModel
-    @ObservedObject var lvm = LoginViewModel()
+    @ObservedObject var loginViewModel = LoginViewModel()
 //    @State var token = ""
     
     var body: some View {
-        if lvm.isLogin {
+        if loginViewModel.isLogin {
             MainView()
-                .environmentObject(lvm)
+                .environmentObject(loginViewModel)
+                .background(Gradient(colors: gradientcolors))
         } else {
-            WebView(token: $lvm.token)
+            WebView(token: $loginViewModel.token)
         }
 
 //        ZStack {
