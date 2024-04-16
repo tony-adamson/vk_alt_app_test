@@ -1,5 +1,5 @@
 {
-  "originHash" : "e67ffab28193fe4f5f230f4a187be6cad432f464a72e8808293b0830b990b70f",
+  "originHash" : "05265e3c42329303a2ff333d4fa64ceb44495dd4a0dbf9a8158eb94852c4c35d",
   "pins" : [
     {
       "identity" : "alamofire?tab=readme-ov-file#swift-package-manager",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "22423b017b99ab8ac44e29e6372f571f782af6e4",
         "version" : "3.0.2"
+      }
+    },
+    {
+      "identity" : "vkid-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/VKCOM/vkid-ios-sdk.git",
+      "state" : {
+        "revision" : "005d6876b367840e8ab5741fd6f69bef2d48f0d7",
+        "version" : "1.3.0"
       }
     }
   ],

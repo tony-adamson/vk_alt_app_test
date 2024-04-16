@@ -27,12 +27,8 @@ class FriendsViewModel: ObservableObject {
             if let data = result.data {
                 if let friends = try? JSONDecoder().decode(FriendsResponse.self, from: data).response.items {
                     completion(friends)
-                } else {
-                    print("Загрузка друзей не удалась")
                 }
-            } else {
-                print("Загрузка данных удалась")
-            }
+            } 
         }
         
     }

@@ -26,12 +26,13 @@ struct WebView: UIViewRepresentable {
             URLQueryItem(name: "client_id", value: "51901884"),
             URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
             URLQueryItem(name: "display", value: "mobile"),
+            URLQueryItem(name: "scope", value: "wall,friends"),
             URLQueryItem(name: "response_type", value: "token")
         ]
         
         let req = URLRequest(url: urlComponent.url!)
         webView.load(req)
-        
+        print(req)
         return webView
     }
     
@@ -40,6 +41,7 @@ struct WebView: UIViewRepresentable {
     func makeCoordinator() -> WebViewCoordinator {
         WebViewCoordinator { token in
             self.token = token
+            print(token)
         }
     }
 }

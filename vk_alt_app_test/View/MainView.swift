@@ -12,29 +12,61 @@ struct MainView: View {
     
     @ObservedObject var fvm = FriendsViewModel()
     
+    @ObservedObject var nvm = NewsViewModel()
+    
     @State var friends = [Friend]()
     
+    @State var news = [Item]()
+    
+    @State private var selectedTab = 0
+    
     var body: some View {
-        ZStack {
-            ScrollView(.vertical) {
-                LazyVStack {
-                    ForEach(friends, id: \.self) { friend in
-                        FriendItemView(firstName: friend.firstName, secondName: friend.lastName, photo: friend.photo)
+            VStack {
+                TabView(selection: $selectedTab) {
+                    // Первая вкладка с друзьями
+                    ZStack {
+                        ScrollView(.vertical) {
+                            LazyVStack {
+                                ForEach(friends, id: \.self) { friend in
+                                    FriendItemView(firstName: friend.firstName, secondName: friend.lastName, photo: friend.photo)
+                                }
+                            }
+                            .padding(10)
+                        }
+                    }
+                    .tag(0)
+                    .onAppear {
+                        fvm.getFriends(token: lvm.token) { friends in
+                            self.friends = friends
+                        }
+                    }
+                    
+                    // Вторая вкладка с новостями
+                    ZStack {
+                        Text("123")
+//                        ScrollView(.vertical) {
+//                            LazyVStack {
+//                                ForEach(news, id: \.self) { news in
+//                                    NewsItemView(text: news.text)
+//                                }
+//                            }
+//                        }
+                    }
+                    .tag(1)
+                    .onAppear {
+                        nvm.getNews(token: lvm.token) { news in
+                            self.news = news
+                        }
                     }
                 }
-                .padding(10)
+                
+                // Нижний бар с вкладками
+                TabBar(selectedTab: $selectedTab)
             }
-        }
-        .padding(.top, 30)
-        .onAppear {
-            fvm.getFriends(token: lvm.token) { friends in
-                self.friends = friends
-                print(friends)
-            }
+            .padding(.top, 30)
         }
     }
-}
 
-#Preview {
-    MainView()
-}
+//#Preview {
+//    MainView()
+//}
