@@ -20,18 +20,20 @@ struct NewsView: View {
             ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(items, id:\.id) { newsItem in
-                        NewsItemView(text: newsItem.text, photo: "3434", firstName: "first name", secondName: "second name")
-                        
+                        let sourceId = newsItem.source_id
+                        if sourceId < 0, let group = groups.first(where: { $0.id == abs(sourceId) }) {
+                            NewsItemView(text: newsItem.text, photo: group.photo_50, firstName: group.name, secondName: "")
+                        } else if sourceId > 0, let profile = profiles.first(where: { $0.id == sourceId }) {
+                            NewsItemView(text: newsItem.text, photo: profile.photo_50, firstName: profile.first_name, secondName: profile.last_name)
+                        }
                     }
                 }
             }
             .onAppear {
-                nvm.getNews(token: lvm.token) { response in
-                    if let response = response {
-                        self.items = response.items
-                        self.profiles = response.profiles
-                        self.groups = response.groups
-                    }
+                nvm.getNews(token: lvm.token) { items, profiles, groups in
+                    self.items = items
+                    self.profiles = profiles
+                    self.groups = groups
                 }
             }
         }

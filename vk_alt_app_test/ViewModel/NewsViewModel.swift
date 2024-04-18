@@ -12,13 +12,13 @@ import Alamofire
 
 class NewsViewModel: ObservableObject {
     
-    func getNews(token: String, completion: @escaping (Response?) -> ()) {
+    func getNews(token: String, completion: @escaping ([Item], [Profile], [Groups]) -> ()) {
         let url = "https://api.vk.com/method/newsfeed.get"
         
         let params: Parameters = [
             "access_token": token,
             "filters": "post",
-            "count": 10,
+            "count": 20,
             "v": "5.199"
         ]
         
@@ -27,14 +27,17 @@ class NewsViewModel: ObservableObject {
             case .success(let data):
                 do {
                     let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: data!)
-                    completion(newsResponse.response)
+                    let items = newsResponse.response.items
+                    let profiles = newsResponse.response.profiles
+                    let groups = newsResponse.response.groups
+                    completion(items, profiles, groups)
                 } catch {
                     print("Error decoding response: \(error)")
-                    completion(nil)
+                    completion([], [], [])
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
-                completion(nil)
+                completion([], [], [])
             }
         }
         

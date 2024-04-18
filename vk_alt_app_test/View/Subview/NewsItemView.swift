@@ -18,15 +18,19 @@ struct NewsItemView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             
-            Text("Аватарка и имя пользователя")
-                .padding([.top, .leading, .trailing], 16)
-            
             HStack {
                 WebImage(url: URL(string: photo))
                     .resizable()
                     .frame(width: 50, height: 50)
                     .clipShape(Circle())
                 .padding(.vertical, 16)
+                VStack {
+                    Text(firstName)
+                    if secondName != "" {
+                        Text(secondName)
+                    }
+                }
+                
             }
             
             Text(text)
