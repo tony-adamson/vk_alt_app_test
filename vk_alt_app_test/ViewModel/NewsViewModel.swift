@@ -12,7 +12,7 @@ import Alamofire
 
 class NewsViewModel: ObservableObject {
     
-    func getNews(token: String, completion: @escaping ([Item], [Profile], [Groups]) -> ()) {
+    func getNews(token: String, completion: @escaping ([Item], [Profile], [Groups], [String]) -> ()) {
         let url = "https://api.vk.com/method/newsfeed.get"
         
         let params: Parameters = [
@@ -28,19 +28,25 @@ class NewsViewModel: ObservableObject {
                 do {
                     let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: data!)
                     let items = newsResponse.response.items
+                    let dates = items.map { self.formatDate($0.date) }
                     let profiles = newsResponse.response.profiles
                     let groups = newsResponse.response.groups
-                    completion(items, profiles, groups)
+                    completion(items, profiles, groups, dates)
                 } catch {
                     print("Error decoding response: \(error)")
-                    completion([], [], [])
+                    completion([], [], [], [])
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
-                completion([], [], [])
+                completion([], [], [], [])
             }
         }
-        
     }
     
+    private func formatDate(_ timestamp: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter.string(from: date)
+    }
 }

@@ -20,7 +20,7 @@ struct Response: Decodable {
 struct Item: Decodable {
     var type: String
     var source_id: Int
-    var date: Date
+    var date: Int
     var attachments: [Attachment]
     var id: Int
     var is_favorite: Bool
