@@ -19,6 +19,7 @@ struct Response: Decodable {
 
 struct Item: Decodable {
     var type: String
+    var source_id: Int
     var date: Date
     var attachments: [Attachment]
     var id: Int

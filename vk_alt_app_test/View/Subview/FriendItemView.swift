@@ -20,6 +20,8 @@ struct FriendItemView: View {
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
+                .padding(.vertical, 16)
+                .padding(.leading, 16)
             VStack(alignment: .leading) {
                 Text(firstName)
                     .font(.system(size: 18, weight: .black))

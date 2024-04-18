@@ -27,8 +27,6 @@
 		020256DC2BCBF31D0016DFCC /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 020256DB2BCBF31D0016DFCC /* SDWebImageSwiftUI */; };
 		020256E02BCD281B0016DFCC /* NewsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256DF2BCD281B0016DFCC /* NewsViewModel.swift */; };
 		020256E22BCD284C0016DFCC /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256E12BCD284C0016DFCC /* NewsModel.swift */; };
-		020256E52BCD720D0016DFCC /* VKID in Frameworks */ = {isa = PBXBuildFile; productRef = 020256E42BCD720D0016DFCC /* VKID */; };
-		020256E72BCD720D0016DFCC /* VKIDCore in Frameworks */ = {isa = PBXBuildFile; productRef = 020256E62BCD720D0016DFCC /* VKIDCore */; };
 		020256EC2BCE77AC0016DFCC /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256EB2BCE77AC0016DFCC /* FriendsView.swift */; };
 		020256EE2BCE78D30016DFCC /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256ED2BCE78D30016DFCC /* NewsView.swift */; };
 /* End PBXBuildFile section */
@@ -63,9 +61,7 @@
 				020256D72BCBF2D70016DFCC /* SDWebImage in Frameworks */,
 				020256D22BCBBB330016DFCC /* Alamofire in Frameworks */,
 				020256D92BCBF2D70016DFCC /* SDWebImageMapKit in Frameworks */,
-				020256E52BCD720D0016DFCC /* VKID in Frameworks */,
 				020256D42BCBBB330016DFCC /* AlamofireDynamic in Frameworks */,
-				020256E72BCD720D0016DFCC /* VKIDCore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,8 +178,6 @@
 				020256D62BCBF2D70016DFCC /* SDWebImage */,
 				020256D82BCBF2D70016DFCC /* SDWebImageMapKit */,
 				020256DB2BCBF31D0016DFCC /* SDWebImageSwiftUI */,
-				020256E42BCD720D0016DFCC /* VKID */,
-				020256E62BCD720D0016DFCC /* VKIDCore */,
 			);
 			productName = vk_alt_app_test;
 			productReference = 020256A52BC8FF550016DFCC /* vk_alt_app_test.app */;
@@ -399,8 +393,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -408,9 +402,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "homeOffice.vk-alt-app-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -428,8 +426,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -437,9 +435,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "homeOffice.vk-alt-app-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -526,16 +528,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 020256DA2BCBF31D0016DFCC /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
 			productName = SDWebImageSwiftUI;
-		};
-		020256E42BCD720D0016DFCC /* VKID */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 020256E32BCD720D0016DFCC /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
-			productName = VKID;
-		};
-		020256E62BCD720D0016DFCC /* VKIDCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 020256E32BCD720D0016DFCC /* XCRemoteSwiftPackageReference "vkid-ios-sdk" */;
-			productName = VKIDCore;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

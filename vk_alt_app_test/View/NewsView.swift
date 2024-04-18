@@ -20,7 +20,7 @@ struct NewsView: View {
             ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(items, id:\.id) { newsItem in
-                        NewsItemView(text: newsItem.text)
+                        NewsItemView(text: newsItem.text, photo: "3434", firstName: "first name", secondName: "second name")
                         
                     }
                 }
