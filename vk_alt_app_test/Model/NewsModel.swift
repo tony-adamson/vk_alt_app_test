@@ -27,6 +27,7 @@ struct Item: Decodable {
     var likes: Like
     var text: String
     var views: Views
+    var post_id: Int
 }
 
 struct Like: Decodable, Hashable {
@@ -77,4 +78,12 @@ struct Sizes: Decodable {
     var user_id: Int?
     var web_view_token: String?
     var has_tags: Bool?
+}
+
+struct LikeResponse: Decodable {
+    var response: LikeR
+}
+
+struct LikeR: Decodable {
+    var likes: Int
 }

@@ -30,6 +30,7 @@
 		020256EC2BCE77AC0016DFCC /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256EB2BCE77AC0016DFCC /* FriendsView.swift */; };
 		020256EE2BCE78D30016DFCC /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256ED2BCE78D30016DFCC /* NewsView.swift */; };
 		020256F02BD143DD0016DFCC /* NewsItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256EF2BD143DD0016DFCC /* NewsItemDetailView.swift */; };
+		020256F22BD269C40016DFCC /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256F12BD269C40016DFCC /* NetworkMonitor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		020256EB2BCE77AC0016DFCC /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		020256ED2BCE78D30016DFCC /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
 		020256EF2BD143DD0016DFCC /* NewsItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemDetailView.swift; sourceTree = "<group>"; };
+		020256F12BD269C40016DFCC /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				020256C82BCAA3BE0016DFCC /* WebView.swift */,
 				020256CE2BCBB9700016DFCC /* FriendsViewModel.swift */,
 				020256DF2BCD281B0016DFCC /* NewsViewModel.swift */,
+				020256F12BD269C40016DFCC /* NetworkMonitor.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				020256CD2BCBB77A0016DFCC /* FriendsModel.swift in Sources */,
 				020256C32BC924FB0016DFCC /* Helpers.swift in Sources */,
 				020256BA2BC900150016DFCC /* LoginView.swift in Sources */,
+				020256F22BD269C40016DFCC /* NetworkMonitor.swift in Sources */,
 				020256E02BCD281B0016DFCC /* NewsViewModel.swift in Sources */,
 				020256AB2BC8FF550016DFCC /* ContentView.swift in Sources */,
 				020256BE2BC905210016DFCC /* LoginViewModel.swift in Sources */,

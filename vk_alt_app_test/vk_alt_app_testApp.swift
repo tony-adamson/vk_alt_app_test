@@ -9,9 +9,16 @@ import SwiftUI
 
 @main
 struct vk_alt_app_testApp: App {
+    @StateObject var networkMonitor = NetworkMonitor()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if networkMonitor.isConnected {
+                ContentView()
+            } else {
+                Text("No internet connection")
+            }
         }
+        .environmentObject(networkMonitor)
     }
 }

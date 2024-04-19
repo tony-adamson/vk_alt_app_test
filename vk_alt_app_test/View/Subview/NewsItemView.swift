@@ -10,6 +10,8 @@ import SDWebImage
 import SDWebImageSwiftUI
 
 struct NewsItemView: View {
+    @ObservedObject var lvm: LoginViewModel
+    @StateObject var nvm = NewsViewModel()
     var text: String
     var photo: String
     var firstName: String
@@ -17,12 +19,21 @@ struct NewsItemView: View {
     var postDate: String
     var likes: Int
     var photoURLs: [String]
+    var userLikes: Bool
+    var canLike: Bool
+    var ownerId: Int
+    var postId: Int
     
     var body: some View {
         NavigationLink(destination: NewsItemDetailView(
+            lvm: lvm,
             text: text,
             likes: likes,
-            photoURLs: photoURLs)
+            photoURLs: photoURLs,
+            userLikes: userLikes,
+            canLike: canLike,
+            ownerId: ownerId,
+            postId: postId)
         ) {
             VStack(alignment: .leading, spacing: 16) {
                 HStack {
@@ -61,12 +72,17 @@ struct NewsItemView: View {
 
 #Preview {
     NewsItemView(
+        lvm: LoginViewModel(),
         text: "kjdfjnkdfnvjndfkvjkdfnkvnkdfjnvkdfnkvnkdfnvkdfjnvkdfnkvnkdfnvkdfnkvndjfkvnkdfjnkvndfkjnvkdfjnkvdfjvk",
         photo: "12121",
         firstName: "Ivan",
         secondName: "Ivanov",
         postDate: "121331",
         likes: 5,
-        photoURLs: []
+        photoURLs: [],
+        userLikes: false,
+        canLike: true,
+        ownerId: 100,
+        postId: 100
     )
 }

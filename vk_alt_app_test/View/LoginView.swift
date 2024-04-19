@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Bindable var loginViewModel = LoginViewModel()
+    @ObservedObject var loginViewModel = LoginViewModel()
     @State private var showMainView = false
     
     var body: some View {

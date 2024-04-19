@@ -10,7 +10,7 @@ import SwiftUI
 let gradientcolors: [Color] = [.gradientTop, .gradientBottom]
 
 struct MainView: View {
-    @Bindable var lvm: LoginViewModel
+    @ObservedObject var lvm: LoginViewModel
     
     var body: some View {
         NavigationView {

@@ -10,9 +10,15 @@ import SDWebImage
 import SDWebImageSwiftUI
 
 struct NewsItemDetailView: View {
+    @ObservedObject var lvm: LoginViewModel
+    @StateObject var nvm = NewsViewModel()
     var text: String
-    var likes: Int
+    @State var likes: Int
     var photoURLs: [String]
+    @State var userLikes: Bool
+    var canLike: Bool
+    var ownerId: Int
+    var postId: Int
     
     var body: some View {
         ScrollView(.vertical) {
@@ -22,13 +28,41 @@ struct NewsItemDetailView: View {
                 
                 ForEach(photoURLs, id: \.self) { url in
                     WebImage(url: URL(string: url))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: .infinity)
                 }
                 
-                HStack {
-                    Image(systemName: "heart")
-                    Text("\(likes) likes")
+                if canLike {
+                    HStack {
+                        Image(systemName: userLikes ? "heart.fill" : "heart")
+                            .onTapGesture {
+                                if userLikes {
+                                    nvm.removeLike(token: lvm.token, ownerId: ownerId, itemId: postId) { result in
+                                        switch result {
+                                        case .success(let newLikes):
+                                            likes = newLikes
+                                            userLikes = false
+                                        case .failure(let error):
+                                            print("Error removing like: \(error)")
+                                        }
+                                    }
+                                } else {
+                                    nvm.addLike(token: lvm.token, ownerId: ownerId, itemId: postId) { result in
+                                        switch result {
+                                        case .success(let newLikes):
+                                            likes = newLikes
+                                            userLikes = true
+                                        case .failure(let error):
+                                            print("Error adding like: \(error)")
+                                        }
+                                    }
+                                }
+                            }
+                        Text("\(likes) likes")
+                    }
+                    .padding()
                 }
-                .padding()
             }
             .frame(maxWidth: .infinity)
             .navigationBarTitle("News Detail")
@@ -40,8 +74,13 @@ struct NewsItemDetailView: View {
 
 #Preview {
     NewsItemDetailView(
+        lvm: LoginViewModel(),
         text: "Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст Это очень очень длинный текст ",
         likes: 5,
-        photoURLs: []
+        photoURLs: [],
+        userLikes: false,
+        canLike: true,
+        ownerId: 100,
+        postId: 100
     )
 }

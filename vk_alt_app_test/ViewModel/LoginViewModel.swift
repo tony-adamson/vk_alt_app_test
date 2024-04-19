@@ -6,15 +6,13 @@
 //
 
 import Foundation
-import Observation
 import SwiftUI
 
-@Observable
-class LoginViewModel {
+class LoginViewModel: ObservableObject {
     
-    var isLogin = false
+    @Published var isLogin = false
     
-    var token = "" {
+    @Published var token = "" {
         didSet {
             isLogin = true
         }

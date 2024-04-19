@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendsView: View {
     
-    @Bindable var lvm: LoginViewModel
+    @ObservedObject var lvm: LoginViewModel
     @State var friends = [Friend]()
     @ObservedObject var fvm = FriendsViewModel()
     
