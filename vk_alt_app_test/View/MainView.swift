@@ -13,22 +13,31 @@ struct MainView: View {
     @Bindable var lvm: LoginViewModel
     
     var body: some View {
-        VStack {
-            TabView {
-                // Первая вкладка с друзьями
-                FriendsView(lvm: lvm)
-                
-                // Вторая вкладка с новостями
-                NewsView(lvm: lvm)
+        NavigationView {
+            VStack {
+                TabView {
+                    // Первая вкладка с друзьями
+                    FriendsView(lvm: lvm)
+                        .tabItem {
+                            Image(systemName: "person.2")
+                            Text("Friends")
+                        }
+                        .background(Gradient(colors: gradientcolors))
+                    
+                    // Вторая вкладка с новостями
+                    NewsView(lvm: lvm)
+                        .tabItem {
+                            Image(systemName: "newspaper")
+                            Text("News")
+                        }
+                        .background(Gradient(colors: gradientcolors))
+                }
+                .foregroundStyle(.white)
             }
-            .background(Gradient(colors: gradientcolors))
-            .tabViewStyle(.page)
-            .foregroundStyle(.white)
         }
-        .padding(.top, 30)
     }
 }
 
-//#Preview {
-//    MainView()
-//}
+#Preview {
+    MainView(lvm: LoginViewModel())
+}

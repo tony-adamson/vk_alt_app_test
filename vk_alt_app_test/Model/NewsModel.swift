@@ -39,7 +39,7 @@ struct Like: Decodable, Hashable {
 
 struct Attachment: Decodable {
     var type: String
-    //let photo: [Photo]
+    var photo: Photo?
 }
 
 struct Views: Decodable {
@@ -57,4 +57,24 @@ struct Groups: Decodable, Hashable {
     var id: Int
     var name: String
     var photo_50: String
+}
+
+struct Photo: Decodable {
+    var album_id: Int
+    var date: Int
+    var id: Int
+    var owner_id: Int
+    var access_key: String
+    var sizes: [Sizes]
+}
+
+struct Sizes: Decodable {
+    var height: Int
+    var type: String
+    var width: Int
+    var url: String
+    var text: String?
+    var user_id: Int?
+    var web_view_token: String?
+    var has_tags: Bool?
 }

@@ -9,10 +9,6 @@ import Foundation
 import Alamofire
 
 class FriendsViewModel: ObservableObject {
-    
-//    @Published var friends = [Friend]()
-    
-//    let mainUrl = "https://api.vk.com/method/"
     func getFriends(token: String, completion: @escaping ([Friend]) -> ()) {
         let url = "https://api.vk.com/method/friends.get"
         
@@ -30,7 +26,5 @@ class FriendsViewModel: ObservableObject {
                 }
             } 
         }
-        
     }
-    
 }

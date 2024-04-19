@@ -32,6 +32,6 @@ struct FriendsView: View {
     }
 }
 
-//#Preview {
-//    FriendsView()
-//}
+#Preview {
+    FriendsView(lvm: LoginViewModel())
+}

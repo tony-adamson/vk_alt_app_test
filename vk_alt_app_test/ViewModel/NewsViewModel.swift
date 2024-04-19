@@ -12,7 +12,7 @@ import Alamofire
 
 class NewsViewModel: ObservableObject {
     
-    func getNews(token: String, completion: @escaping ([Item], [Profile], [Groups], [String]) -> ()) {
+    func getNews(token: String, completion: @escaping ([Item], [Profile], [Groups], [String], [Int], [[String]]) -> ()) {
         let url = "https://api.vk.com/method/newsfeed.get"
         
         let params: Parameters = [
@@ -31,14 +31,16 @@ class NewsViewModel: ObservableObject {
                     let dates = items.map { self.formatDate($0.date) }
                     let profiles = newsResponse.response.profiles
                     let groups = newsResponse.response.groups
-                    completion(items, profiles, groups, dates)
+                    let likes = items.map { $0.likes.count }
+                    let photoURLs = items.map { self.getSmallSizePhotoURLs(from: $0) }
+                    completion(items, profiles, groups, dates, likes, photoURLs)
                 } catch {
                     print("Error decoding response: \(error)")
-                    completion([], [], [], [])
+                    completion([], [], [], [], [], [])
                 }
             case .failure(let error):
                 print("Error fetching news data: \(error)")
-                completion([], [], [], [])
+                completion([], [], [], [], [], [])
             }
         }
     }
@@ -48,5 +50,21 @@ class NewsViewModel: ObservableObject {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy HH:mm"
         return formatter.string(from: date)
+    }
+    
+    private func getSmallSizePhotoURLs(from item: Item) -> [String] {
+        var urls: [String] = []
+        
+        for attachment in item.attachments {
+            if let photo = attachment.photo {
+                for size in photo.sizes {
+                    if size.type == "s" {
+                        urls.append(size.url)
+                    }
+                }
+            }
+        }
+        
+        return urls
     }
 }

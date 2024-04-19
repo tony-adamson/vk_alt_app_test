@@ -29,6 +29,7 @@
 		020256E22BCD284C0016DFCC /* NewsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256E12BCD284C0016DFCC /* NewsModel.swift */; };
 		020256EC2BCE77AC0016DFCC /* FriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256EB2BCE77AC0016DFCC /* FriendsView.swift */; };
 		020256EE2BCE78D30016DFCC /* NewsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256ED2BCE78D30016DFCC /* NewsView.swift */; };
+		020256F02BD143DD0016DFCC /* NewsItemDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020256EF2BD143DD0016DFCC /* NewsItemDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		020256E12BCD284C0016DFCC /* NewsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsModel.swift; sourceTree = "<group>"; };
 		020256EB2BCE77AC0016DFCC /* FriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsView.swift; sourceTree = "<group>"; };
 		020256ED2BCE78D30016DFCC /* NewsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsView.swift; sourceTree = "<group>"; };
+		020256EF2BD143DD0016DFCC /* NewsItemDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsItemDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				020256ED2BCE78D30016DFCC /* NewsView.swift */,
 				020256EB2BCE77AC0016DFCC /* FriendsView.swift */,
 				020256B92BC900150016DFCC /* LoginView.swift */,
+				020256EF2BD143DD0016DFCC /* NewsItemDetailView.swift */,
 				020256EA2BCE772F0016DFCC /* Subview */,
 			);
 			path = View;
@@ -252,6 +255,7 @@
 				020256BE2BC905210016DFCC /* LoginViewModel.swift in Sources */,
 				020256C72BC9441A0016DFCC /* NewsItemView.swift in Sources */,
 				020256A92BC8FF550016DFCC /* vk_alt_app_testApp.swift in Sources */,
+				020256F02BD143DD0016DFCC /* NewsItemDetailView.swift in Sources */,
 				020256CF2BCBB9700016DFCC /* FriendsViewModel.swift in Sources */,
 				020256CB2BCBB6520016DFCC /* FriendItemView.swift in Sources */,
 			);
