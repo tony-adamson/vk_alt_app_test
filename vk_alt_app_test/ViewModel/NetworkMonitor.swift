@@ -12,6 +12,7 @@ class NetworkMonitor: ObservableObject {
     private let monitor: NWPathMonitor
     private let queue: DispatchQueue
     
+    @Published var showAlert = false
     @Published var isConnected: Bool
     
     init() {
@@ -21,10 +22,23 @@ class NetworkMonitor: ObservableObject {
         
         monitor.pathUpdateHandler = { [weak self] path in
             DispatchQueue.main.async {
-                self?.isConnected = path.status == .satisfied
+                if path.status == .satisfied {
+                    self?.isConnected = true
+                    self?.showAlert = false
+                } else {
+                    self?.isConnected = false
+                    self?.showAlert = true
+                }
             }
         }
-        
         monitor.start(queue: queue)
+    }
+    
+    func startMonitoring() {
+        monitor.start(queue: queue)
+        DispatchQueue.main.async {
+            self.isConnected = self.monitor.currentPath.status == .satisfied
+            self.showAlert = !self.isConnected
+        }
     }
 }

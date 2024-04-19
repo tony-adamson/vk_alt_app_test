@@ -13,12 +13,8 @@ struct vk_alt_app_testApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if networkMonitor.isConnected {
-                ContentView()
-            } else {
-                Text("No internet connection")
-            }
+            ContentView()
+                .environmentObject(networkMonitor)
         }
-        .environmentObject(networkMonitor)
     }
 }

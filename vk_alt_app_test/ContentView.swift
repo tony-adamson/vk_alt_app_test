@@ -8,13 +8,32 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var networkMonitor: NetworkMonitor
     
     var body: some View {
-        LoginView()
-            .ignoresSafeArea(.all)
+        Group {
+            if networkMonitor.isConnected {
+                LoginView()
+                    .ignoresSafeArea(.all)
+            } else {
+                Text("Checking network...")
+            }
+        }
+        .alert(isPresented: $networkMonitor.showAlert) {
+            Alert(
+                title: Text("No Internet Connection"),
+                message: Text("Please check your internet connection and try again."),
+                dismissButton: .default(Text("Try Again")) {
+                    networkMonitor.startMonitoring()
+                }
+            )
+        }
     }
 }
 
 #Preview {
     ContentView()
 }
+
+
+
