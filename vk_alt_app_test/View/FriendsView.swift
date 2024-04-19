@@ -29,6 +29,13 @@ struct FriendsView: View {
                 }
             }
         }
+        .alert(isPresented: $fvm.showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(fvm.errorMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 

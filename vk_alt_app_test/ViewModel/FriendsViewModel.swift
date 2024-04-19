@@ -9,6 +9,9 @@ import Foundation
 import Alamofire
 
 class FriendsViewModel: ObservableObject {
+    @Published var showAlert = false
+    @Published var errorMessage = ""
+    
     func getFriends(token: String, completion: @escaping ([Friend]) -> ()) {
         let url = "https://api.vk.com/method/friends.get"
         
@@ -20,11 +23,16 @@ class FriendsViewModel: ObservableObject {
         ]
         
         AF.request(url, method: .get, parameters: params).response { result in
-            if let data = result.data {
+            if let error = result.error {
+                DispatchQueue.main.async {
+                    self.errorMessage = error.localizedDescription
+                    self.showAlert = true
+                }
+            } else if let data = result.data {
                 if let friends = try? JSONDecoder().decode(FriendsResponse.self, from: data).response.items {
                     completion(friends)
                 }
-            } 
+            }
         }
     }
 }
