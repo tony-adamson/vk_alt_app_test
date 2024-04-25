@@ -11,7 +11,7 @@ import SDWebImageSwiftUI
 
 struct NewsItemView: View {
     @ObservedObject var loginViewModel: LoginViewModel
-    var newsItem: NewsItemModel
+    @ObservedObject var newsItem: NewsItemModel
     
     var body: some View {
         NavigationLink(destination: NewsItemDetailView(loginViewModel: loginViewModel, newsItem: newsItem)) {
