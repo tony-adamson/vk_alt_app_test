@@ -38,8 +38,11 @@ struct NewsItemDetailView: View {
                     .multilineTextAlignment(.leading)
                 
                 if !newsItem.photoURLs.isEmpty {
-                    ForEach() { image in
-                        WebImage(url: URL(string: newsItem.authorPhotoURL))
+                    ForEach(newsItem.photoURLs, id: \.self) { url in
+                        WebImage(url: URL(string: url))
+                            .resizable()
+                            .scaledToFit()
+                            .frame(maxWidth: .infinity)
                     }
                 }
                 
@@ -61,6 +64,7 @@ struct NewsItemDetailView: View {
             .background(.green.opacity(0.1))
             .foregroundStyle(.black)
         }
+        .scrollIndicators(.hidden)
         .padding()
     }
 }
