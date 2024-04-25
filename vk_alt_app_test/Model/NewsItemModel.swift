@@ -17,4 +17,8 @@ struct NewsItemModel: Identifiable {
     var authorName: String
     var authorPhotoURL: String
     var photoURLs: [String]
+    var canLike: Int
+    var userLikes: Int
+    var ownerId : Int
+    var postId: Int
 }

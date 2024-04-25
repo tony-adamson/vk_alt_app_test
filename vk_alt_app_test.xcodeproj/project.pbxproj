@@ -133,7 +133,6 @@
 				020256EF2BD143DD0016DFCC /* NewsItemDetailView.swift */,
 				020256CA2BCBB6520016DFCC /* FriendItemView.swift */,
 				020256C62BC944190016DFCC /* NewsItemView.swift */,
-				020256EA2BCE772F0016DFCC /* Subview */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -156,13 +155,6 @@
 				020256C22BC924FB0016DFCC /* Helpers.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		020256EA2BCE772F0016DFCC /* Subview */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Subview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

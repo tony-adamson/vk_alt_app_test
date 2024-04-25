@@ -10,6 +10,8 @@ import SDWebImage
 import SDWebImageSwiftUI
 
 struct NewsItemDetailView: View {
+    @ObservedObject var loginViewModel: LoginViewModel
+    @StateObject var newsViewModel = NewsViewModel()
     var newsItem: NewsItemModel
     
     var body: some View {
@@ -46,10 +48,40 @@ struct NewsItemDetailView: View {
                     }
                 }
                 
+                
                 //Block with additional info
                 HStack {
-                    Image(systemName: "heart")
-                    Text("\(newsItem.likesCount)")
+                    if newsItem.canLike == 1 {
+                        Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.fill")
+                            .onTapGesture {
+                                if newsItem.userLikes == 0 {
+                                    newsViewModel.addLike(
+                                        token: loginViewModel.token,
+                                        ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
+                                            switch result {
+                                            case .success(let newLikes):
+                                                likes = newLikes
+                                                newsItem.userLikes = 1
+                                            case .failure(let error):
+                                                print("Error adding like: \(error)")
+                                            }
+                                        }
+                                } else {
+                                    newsViewModel.removeLike(
+                                        token: loginViewModel.token,
+                                        ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
+                                            switch result {
+                                            case .success(let newLikes):
+                                                likes = newLikes
+                                                newsItem.userLikes = 0
+                                            case .failure(let error):
+                                                print("Error adding like: \(error)")
+                                            }
+                                        }
+                                }
+                            }
+                        Text("\(newsItem.likesCount)")
+                    }
                     Image(systemName: "repeat")
                         .padding(.leading, 8)
                     Text("\(newsItem.repostsCount)")
@@ -71,6 +103,7 @@ struct NewsItemDetailView: View {
 
 #Preview {
     NewsItemDetailView(
+        loginViewModel: LoginViewModel(), 
         newsItem: NewsItemModel(
             newsText: "qwerty",
             newsDate: "123-122-122",
@@ -79,7 +112,11 @@ struct NewsItemDetailView: View {
             viewsCount: 10,
             authorName: "Vasya Pupkins",
             authorPhotoURL: "",
-            photoURLs: []
+            photoURLs: [],
+            canLike: 1,
+            userLikes: 0,
+            ownerId: 100,
+            postId: 200
         )
     )
 }

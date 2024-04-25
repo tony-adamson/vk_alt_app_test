@@ -56,6 +56,10 @@ class NewsViewModel: ObservableObject {
             let likesCount = item.likes.count
             let repostsCount = item.reposts.count
             let viewsCount = item.views.count
+            let canLike = item.likes.can_like
+            let userLikes = item.likes.user_likes
+            let ownerId = item.id
+            let postId = item.post_id
 
             if item.source_id > 0, let profile = profiles.first(where: { $0.id == item.source_id }) {
                 return NewsItemModel(
@@ -66,7 +70,11 @@ class NewsViewModel: ObservableObject {
                     viewsCount: viewsCount,
                     authorName: "\(profile.first_name) \(profile.last_name)",
                     authorPhotoURL: profile.photo_50,
-                    photoURLs: photoURLs
+                    photoURLs: photoURLs,
+                    canLike: canLike,
+                    userLikes: userLikes,
+                    ownerId: ownerId,
+                    postId: postId
                 )
             } else if item.source_id < 0, let group = groups.first(where: { $0.id == abs(item.source_id) }) {
                 return NewsItemModel(
@@ -77,7 +85,11 @@ class NewsViewModel: ObservableObject {
                     viewsCount: viewsCount,
                     authorName: group.name,
                     authorPhotoURL: group.photo_50,
-                    photoURLs: photoURLs
+                    photoURLs: photoURLs,
+                    canLike: canLike,
+                    userLikes: userLikes,
+                    ownerId: ownerId,
+                    postId: postId
                 )
             } else {
                 return NewsItemModel(
@@ -88,7 +100,11 @@ class NewsViewModel: ObservableObject {
                     viewsCount: viewsCount,
                     authorName: "Unknown",
                     authorPhotoURL: "",
-                    photoURLs: photoURLs
+                    photoURLs: photoURLs,
+                    canLike: canLike,
+                    userLikes: userLikes,
+                    ownerId: ownerId,
+                    postId: postId
                 )
             }
         }
