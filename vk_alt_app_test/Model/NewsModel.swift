@@ -28,6 +28,12 @@ struct Item: Decodable {
     var text: String
     var views: Views
     var post_id: Int
+    var reposts: Reposts
+}
+
+struct Reposts: Decodable {
+    var count: Int
+    var user_reposted: Int
 }
 
 struct Like: Decodable, Hashable {

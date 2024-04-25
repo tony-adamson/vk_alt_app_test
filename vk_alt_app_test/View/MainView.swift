@@ -7,37 +7,32 @@
 
 import SwiftUI
 
-let gradientcolors: [Color] = [.gradientTop, .gradientBottom]
-
 struct MainView: View {
-    @ObservedObject var lvm: LoginViewModel
+    @ObservedObject var loginViewModel: LoginViewModel
     
     var body: some View {
         NavigationView {
             VStack {
                 TabView {
                     // Первая вкладка с друзьями
-                    FriendsView(lvm: lvm)
+                    FriendsView(lvm: loginViewModel)
                         .tabItem {
                             Image(systemName: "person.2")
                             Text("Friends")
                         }
-                        .background(Gradient(colors: gradientcolors))
                     
                     // Вторая вкладка с новостями
-                    NewsView(lvm: lvm)
+                    NewsView(loginViewModel: loginViewModel)
                         .tabItem {
                             Image(systemName: "newspaper")
                             Text("News")
                         }
-                        .background(Gradient(colors: gradientcolors))
                 }
-                .foregroundStyle(.white)
             }
         }
     }
 }
 
 #Preview {
-    MainView(lvm: LoginViewModel())
+    MainView(loginViewModel: LoginViewModel())
 }

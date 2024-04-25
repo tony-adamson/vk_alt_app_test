@@ -1,19 +1,19 @@
 //
-//  NewsItemDetailView.swift
+//  PostView.swift
 //  vk_alt_app_test
 //
-//  Created by Антон Адамсон on 18.04.2024.
+//  Created by Антон Адамсон on 12.04.2024.
 //
 
 import SwiftUI
 import SDWebImage
 import SDWebImageSwiftUI
 
-struct NewsItemDetailView: View {
+struct NewsItemView: View {
     var newsItem: NewsItemModel
     
     var body: some View {
-        ScrollView(.vertical) {
+        NavigationLink(destination: NewsItemDetailView(newsItem: newsItem)) {
             VStack(alignment: .leading, spacing: 16) {
                 // up info block
                 HStack {
@@ -37,12 +37,6 @@ struct NewsItemDetailView: View {
                 Text(newsItem.newsText)
                     .multilineTextAlignment(.leading)
                 
-                if !newsItem.photoURLs.isEmpty {
-                    ForEach() { image in
-                        WebImage(url: URL(string: newsItem.authorPhotoURL))
-                    }
-                }
-                
                 //Block with additional info
                 HStack {
                     Image(systemName: "heart")
@@ -60,13 +54,14 @@ struct NewsItemDetailView: View {
             .padding()
             .background(.green.opacity(0.1))
             .foregroundStyle(.black)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         }
         .padding()
     }
 }
 
 #Preview {
-    NewsItemDetailView(
+    NewsItemView(
         newsItem: NewsItemModel(
             newsText: "qwerty",
             newsDate: "123-122-122",
@@ -79,3 +74,4 @@ struct NewsItemDetailView: View {
         )
     )
 }
+
