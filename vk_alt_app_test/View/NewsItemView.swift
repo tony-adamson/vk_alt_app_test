@@ -10,10 +10,11 @@ import SDWebImage
 import SDWebImageSwiftUI
 
 struct NewsItemView: View {
+    @ObservedObject var loginViewModel: LoginViewModel
     var newsItem: NewsItemModel
     
     var body: some View {
-        NavigationLink(destination: NewsItemDetailView(newsItem: newsItem)) {
+        NavigationLink(destination: NewsItemDetailView(loginViewModel: loginViewModel, newsItem: newsItem)) {
             VStack(alignment: .leading, spacing: 16) {
                 // up info block
                 HStack {
@@ -62,6 +63,7 @@ struct NewsItemView: View {
 
 #Preview {
     NewsItemView(
+        loginViewModel: LoginViewModel(),
         newsItem: NewsItemModel(
             newsText: "qwerty",
             newsDate: "123-122-122",
@@ -70,7 +72,11 @@ struct NewsItemView: View {
             viewsCount: 10,
             authorName: "Vasya Pupkins",
             authorPhotoURL: "",
-            photoURLs: []
+            photoURLs: [],
+            canLike: 1,
+            userLikes: 10,
+            ownerId: 100,
+            postId: 200
         )
     )
 }

@@ -39,6 +39,7 @@ struct NewsItemDetailView: View {
                 Text(newsItem.newsText)
                     .multilineTextAlignment(.leading)
                 
+                // Block with photo
                 if !newsItem.photoURLs.isEmpty {
                     ForEach(newsItem.photoURLs, id: \.self) { url in
                         WebImage(url: URL(string: url))
@@ -53,32 +54,9 @@ struct NewsItemDetailView: View {
                 HStack {
                     if newsItem.canLike == 1 {
                         Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.fill")
+                            .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
                             .onTapGesture {
-                                if newsItem.userLikes == 0 {
-                                    newsViewModel.addLike(
-                                        token: loginViewModel.token,
-                                        ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
-                                            switch result {
-                                            case .success(let newLikes):
-                                                likes = newLikes
-                                                newsItem.userLikes = 1
-                                            case .failure(let error):
-                                                print("Error adding like: \(error)")
-                                            }
-                                        }
-                                } else {
-                                    newsViewModel.removeLike(
-                                        token: loginViewModel.token,
-                                        ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
-                                            switch result {
-                                            case .success(let newLikes):
-                                                likes = newLikes
-                                                newsItem.userLikes = 0
-                                            case .failure(let error):
-                                                print("Error adding like: \(error)")
-                                            }
-                                        }
-                                }
+                                newsViewModel.toggleLike(for: newsItem, loginViewModel: loginViewModel)
                             }
                         Text("\(newsItem.likesCount)")
                     }

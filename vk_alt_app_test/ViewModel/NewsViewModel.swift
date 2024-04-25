@@ -201,4 +201,37 @@ class NewsViewModel: ObservableObject {
             }
         }
     }
+    
+    func toggleLike(for item: NewsItemModel, loginViewModel: LoginViewModel) {
+        if item.userLikes == 0 {
+            // Добавление лайка
+            addLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.postId) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let likes):
+                        // Предполагается, что объект item изменяемый, и мы можем его изменить напрямую
+                        item.userLikes = 1
+                        item.likesCount = likes
+                        self.objectWillChange.send() // Если NewsItemModel - ObservableObject
+                    case .failure(let error):
+                        print("Ошибка при добавлении лайка: \(error)")
+                    }
+                }
+            }
+        } else {
+            // Удаление лайка
+            removeLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.postId) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let likes):
+                        item.userLikes = 0
+                        item.likesCount = likes
+                        self.objectWillChange.send() // Если NewsItemModel - ObservableObject
+                    case .failure(let error):
+                        print("Ошибка при удалении лайка: \(error)")
+                    }
+                }
+            }
+        }
+    }
 }

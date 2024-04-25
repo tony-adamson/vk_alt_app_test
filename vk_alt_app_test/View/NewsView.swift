@@ -16,7 +16,7 @@ struct NewsView: View {
             ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(newsViewModel.newsItems) { newsItem in
-                        NewsItemView(newsItem: newsItem)
+                        NewsItemView(loginViewModel: loginViewModel, newsItem: newsItem)
                     }
                 }
             }
