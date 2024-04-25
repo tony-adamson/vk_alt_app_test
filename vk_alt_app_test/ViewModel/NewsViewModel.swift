@@ -157,6 +157,7 @@ class NewsViewModel: ObservableObject {
         ]
        
         AF.request(url, method: .get, parameters: params).response { response in
+            print("Full JSON Response: \(response.value)")
             switch response.result {
             case .success(let data):
                 do {
@@ -171,6 +172,8 @@ class NewsViewModel: ObservableObject {
                 completion(.failure(error))
             }
         }
+        
+//        getNews(token: token)
     }
     
     // Dislike function
@@ -200,38 +203,24 @@ class NewsViewModel: ObservableObject {
                 completion(.failure(error))
             }
         }
+        
+//        getNews(token: token)
     }
     
-    func toggleLike(for item: NewsItemModel, loginViewModel: LoginViewModel) {
-        if item.userLikes == 0 {
-            // Добавление лайка
-            addLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.postId) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let likes):
-                        // Предполагается, что объект item изменяемый, и мы можем его изменить напрямую
-                        item.userLikes = 1
-                        item.likesCount = likes
-                        self.objectWillChange.send() // Если NewsItemModel - ObservableObject
-                    case .failure(let error):
-                        print("Ошибка при добавлении лайка: \(error)")
-                    }
-                }
-            }
-        } else {
-            // Удаление лайка
-            removeLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.postId) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let likes):
-                        item.userLikes = 0
-                        item.likesCount = likes
-                        self.objectWillChange.send() // Если NewsItemModel - ObservableObject
-                    case .failure(let error):
-                        print("Ошибка при удалении лайка: \(error)")
-                    }
-                }
-            }
-        }
-    }
+//    func toggleLike(for item: NewsItemModel, loginViewModel: LoginViewModel) {
+//        if item.userLikes == 0 {
+//            addLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.id) { response in
+//                <#code#>
+//            }
+//        } else {
+//            removeLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.id, completion: <#T##(Result<Int, Error>) -> Void#>)
+//        }
+//        action(item, loginViewModel) { [weak self] success in
+//            if success {
+//                self?.getNews(token: loginViewModel.token)
+//            } else {
+//                print("Ошибка при обработке лайка")
+//            }
+//        } <#(Result<Int, any Error>) -> ()#>
+//    }
 }

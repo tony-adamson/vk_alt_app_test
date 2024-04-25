@@ -56,7 +56,29 @@ struct NewsItemDetailView: View {
                         Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.fill")
                             .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
                             .onTapGesture {
-                                newsViewModel.toggleLike(for: newsItem, loginViewModel: loginViewModel)
+                                if newsItem.userLikes == 0 {
+                                    newsViewModel.addLike(
+                                        token: loginViewModel.token,
+                                        ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
+                                            switch result {
+                                            case .success(let likes):
+                                                newsViewModel.getNews(token: loginViewModel.token)
+                                            case .failure(let error):
+                                                print("ERROR!!! \(error)")
+                                            }
+                                        }
+                                } else {
+                                    newsViewModel.removeLike(
+                                        token: loginViewModel.token,
+                                        ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
+                                            switch result {
+                                            case .success(let likes):
+                                                newsViewModel.getNews(token: loginViewModel.token)
+                                            case .failure(let error):
+                                                print("ERROR!!! \(error)")
+                                            }
+                                        }
+                                }
                             }
                         Text("\(newsItem.likesCount)")
                     }
