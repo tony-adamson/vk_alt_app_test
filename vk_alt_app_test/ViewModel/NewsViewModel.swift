@@ -157,7 +157,6 @@ class NewsViewModel: ObservableObject {
         ]
        
         AF.request(url, method: .get, parameters: params).response { response in
-            print("Full JSON Response: \(response.value)")
             switch response.result {
             case .success(let data):
                 do {
@@ -168,12 +167,10 @@ class NewsViewModel: ObservableObject {
                     completion(.failure(error))
                 }
             case .failure(let error):
-                print("Error adding like: \(error)")
+                print("Error removing like: \(error)")
                 completion(.failure(error))
             }
         }
-        
-//        getNews(token: token)
     }
     
     // Dislike function
@@ -203,24 +200,6 @@ class NewsViewModel: ObservableObject {
                 completion(.failure(error))
             }
         }
-        
-//        getNews(token: token)
     }
     
-//    func toggleLike(for item: NewsItemModel, loginViewModel: LoginViewModel) {
-//        if item.userLikes == 0 {
-//            addLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.id) { response in
-//                <#code#>
-//            }
-//        } else {
-//            removeLike(token: loginViewModel.token, ownerId: item.ownerId, itemId: item.id, completion: <#T##(Result<Int, Error>) -> Void#>)
-//        }
-//        action(item, loginViewModel) { [weak self] success in
-//            if success {
-//                self?.getNews(token: loginViewModel.token)
-//            } else {
-//                print("Ошибка при обработке лайка")
-//            }
-//        } <#(Result<Int, any Error>) -> ()#>
-//    }
 }
