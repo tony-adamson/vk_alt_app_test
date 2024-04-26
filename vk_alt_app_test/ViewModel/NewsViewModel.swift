@@ -58,7 +58,7 @@ class NewsViewModel: ObservableObject {
             let viewsCount = item.views.count
             let canLike = item.likes.can_like
             let userLikes = item.likes.user_likes
-            let ownerId = item.id
+            let ownerId = item.owner_id
             let postId = item.post_id
 
             if item.source_id > 0, let profile = profiles.first(where: { $0.id == item.source_id }) {
@@ -144,8 +144,32 @@ class NewsViewModel: ObservableObject {
         return sortedSizes.first!
     }
     
+    func likeFunctionTest(token: String, ownerId: Int, itemId: Int, isLiked: Int) {
+        print("isLiked при нажатии - \(isLiked)")
+        
+        if isLiked == 0 {
+            addLike(token: token, ownerId: ownerId, itemId: itemId) { result in
+                switch result {
+                case .success(let success):
+                    print("Like added: \(success)")
+                case .failure(let failure):
+                    print("Error adding like: \(failure)")
+                }
+            }
+        } else {
+            removeLike(token: token, ownerId: ownerId, itemId: itemId) { result in
+                switch result {
+                case .success(let success):
+                    print("Like deleted: \(success)")
+                case .failure(let failure):
+                    print("Error deleting like: \(failure)")
+                }
+            }
+        }
+    }
+    
     // Add Like function
-    func addLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
+    private func addLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
         let url = "https://api.vk.com/method/likes.add"
         
         let params: Parameters = [
@@ -175,7 +199,7 @@ class NewsViewModel: ObservableObject {
     }
     
     // Dislike function
-    func removeLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
+    private func removeLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
         let url = "https://api.vk.com/method/likes.delete"
         
         let params: Parameters = [

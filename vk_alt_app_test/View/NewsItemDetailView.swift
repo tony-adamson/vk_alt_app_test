@@ -52,20 +52,29 @@ struct NewsItemDetailView: View {
                 
                 //Block with additional info
                 HStack {
-                    if newsItem.canLike == 1 {
-                        Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.fill")
-                            .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
-                            .onTapGesture {
-                                if newsItem.userLikes == 0 {
-                                    newsItem.userLikes = 1
-                                    newsItem.likesCount += 1
-                                } else {
-                                    newsItem.userLikes = 0
-                                    newsItem.likesCount -= 1
-                                }
+                    Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.circle.fill")
+                        .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
+                        .onTapGesture {
+                            if newsItem.userLikes == 0 {
+                                newsViewModel.likeFunctionTest(
+                                    token: loginViewModel.token,
+                                    ownerId: newsItem.ownerId,
+                                    itemId: newsItem.postId,
+                                    isLiked: newsItem.userLikes)
+                                newsItem.userLikes = 1
+                                newsItem.likesCount += 1
+                            } else {
+                                newsViewModel.likeFunctionTest(
+                                    token: loginViewModel.token,
+                                    ownerId: newsItem.ownerId,
+                                    itemId: newsItem.postId,
+                                    isLiked: newsItem.userLikes)
+                                newsItem.userLikes = 0
+                                newsItem.likesCount -= 1
                             }
-                        Text("\(newsItem.likesCount)")
-                    }
+                        }
+                    Text("\(newsItem.likesCount)")
+                    
                     Image(systemName: "repeat")
                         .padding(.leading, 8)
                     Text("\(newsItem.repostsCount)")
@@ -85,74 +94,8 @@ struct NewsItemDetailView: View {
     }
 }
 
-
-//struct NewsItemDetailView: View {
-//    @ObservedObject var loginViewModel: LoginViewModel
-//    @StateObject var newsViewModel = NewsViewModel()
-//    var text: String
-//    @State var likes: Int
-//    var photoURLs: [String]
-//    @State var userLikes: Int
-//    var canLike: Int
-//    var ownerId: Int
-//    var postId: Int
-    
-//    var body: some View {
-//        ScrollView(.vertical) {
-//            VStack(alignment: .leading) {
-//                Text(text)
-//                    .padding()
-//                
-//                ForEach(photoURLs, id: \.self) { url in
-//                    WebImage(url: URL(string: url))
-//                        .resizable()
-//                        .scaledToFit()
-//                        .frame(maxWidth: .infinity)
-//                }
-//                
-//                if canLike == 1 {
-//                    HStack {
-//                        Image(systemName: userLikes == 1 ? "heart.fill" : "heart")
-//                            .foregroundColor(userLikes == 0 ? .gray : .red)
-//                            .onTapGesture {
-//                                if userLikes == 1 {
-//                                    newsViewModel.removeLike(token: loginViewModel.token, ownerId: ownerId, itemId: postId) { result in
-//                                        switch result {
-//                                        case .success(let newLikes):
-//                                            likes = newLikes
-//                                            userLikes = 0
-//                                        case .failure(let error):
-//                                            print("Error removing like: \(error)")
-//                                        }
-//                                    }
-//                                } else {
-//                                    newsViewModel.addLike(token: loginViewModel.token, ownerId: ownerId, itemId: postId) { result in
-//                                        switch result {
-//                                        case .success(let newLikes):
-//                                            likes = newLikes
-//                                            userLikes = 1
-//                                        case .failure(let error):
-//                                            print("Error adding like: \(error)")
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        Text("\(likes) likes")
-//                    }
-//                    .padding()
-//                }
-//            }
-//            .frame(maxWidth: .infinity)
-//            .navigationBarTitle("News Detail")
-//            .foregroundStyle(.white)
-//        }
-//        .background(.tint.opacity(0.6))
-//    }
-//}
-
 #Preview {
     NewsItemDetailView(
-//        loginViewModel: LoginViewModel(), text: "qwerty", likes: 10, photoURLs: [], userLikes: 0, canLike: 1, ownerId: 100, postId: 200
         loginViewModel: LoginViewModel(),
         newsItem: NewsItemModel(
             newsText: "qwerty",

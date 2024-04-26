@@ -29,6 +29,7 @@ struct Item: Decodable {
     var views: Views
     var post_id: Int
     var reposts: Reposts
+    var owner_id: Int
 }
 
 struct Reposts: Decodable {
