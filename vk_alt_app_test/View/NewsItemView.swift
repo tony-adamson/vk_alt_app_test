@@ -14,7 +14,15 @@ struct NewsItemView: View {
     @ObservedObject var newsItem: NewsItemModel
     
     var body: some View {
-        NavigationLink(destination: NewsItemDetailView(loginViewModel: loginViewModel, newsItem: newsItem)) {
+//        NavigationLink(destination: NewsItemDetailView(loginViewModel: loginViewModel,
+//                                                       text: newsItem.newsText,
+//                                                       likes: newsItem.likesCount,
+//                                                       photoURLs: newsItem.photoURLs,
+//                                                       userLikes: newsItem.userLikes,
+//                                                       canLike: newsItem.canLike,
+//                                                       ownerId: newsItem.ownerId,
+//                                                       postId: newsItem.postId)) {
+            NavigationLink(destination: NewsItemDetailView(loginViewModel: loginViewModel, newsItem: newsItem)) {
             VStack(alignment: .leading, spacing: 16) {
                 // up info block
                 HStack {
@@ -40,8 +48,11 @@ struct NewsItemView: View {
                 
                 //Block with additional info
                 HStack {
-                    Image(systemName: "heart")
-                    Text("\(newsItem.likesCount)")
+                    if newsItem.canLike == 1 {
+                        Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.fill")
+                            .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
+                        Text("\(newsItem.likesCount)")
+                    }
                     Image(systemName: "repeat")
                         .padding(.leading, 8)
                     Text("\(newsItem.repostsCount)")

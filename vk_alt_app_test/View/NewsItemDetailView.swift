@@ -56,26 +56,12 @@ struct NewsItemDetailView: View {
                         Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.fill")
                             .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
                             .onTapGesture {
-                                if newsItem.userLikes == 1 {
-                                    newsViewModel.removeLike(token: loginViewModel.token, ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
-                                        switch result {
-                                        case .success(let newLikes):
-                                            newsItem.likesCount = newLikes
-                                            newsItem.userLikes = 0
-                                        case .failure(let error):
-                                            print("Error removing like: \(error)")
-                                        }
-                                    }
+                                if newsItem.userLikes == 0 {
+                                    newsItem.userLikes = 1
+                                    newsItem.likesCount += 1
                                 } else {
-                                    newsViewModel.addLike(token: loginViewModel.token, ownerId: newsItem.ownerId, itemId: newsItem.postId) { result in
-                                        switch result {
-                                        case .success(let newLikes):
-                                            newsItem.likesCount = newLikes
-                                            newsItem.userLikes = 1
-                                        case .failure(let error):
-                                            print("Error adding like: \(error)")
-                                        }
-                                    }
+                                    newsItem.userLikes = 0
+                                    newsItem.likesCount -= 1
                                 }
                             }
                         Text("\(newsItem.likesCount)")
@@ -101,16 +87,16 @@ struct NewsItemDetailView: View {
 
 
 //struct NewsItemDetailView: View {
-//    @ObservedObject var lvm: LoginViewModel
-//    @StateObject var nvm = NewsViewModel()
+//    @ObservedObject var loginViewModel: LoginViewModel
+//    @StateObject var newsViewModel = NewsViewModel()
 //    var text: String
 //    @State var likes: Int
 //    var photoURLs: [String]
-//    @State var userLikes: Bool
-//    var canLike: Bool
+//    @State var userLikes: Int
+//    var canLike: Int
 //    var ownerId: Int
 //    var postId: Int
-//    
+    
 //    var body: some View {
 //        ScrollView(.vertical) {
 //            VStack(alignment: .leading) {
@@ -124,26 +110,27 @@ struct NewsItemDetailView: View {
 //                        .frame(maxWidth: .infinity)
 //                }
 //                
-//                if canLike {
+//                if canLike == 1 {
 //                    HStack {
-//                        Image(systemName: userLikes ? "heart.fill" : "heart")
+//                        Image(systemName: userLikes == 1 ? "heart.fill" : "heart")
+//                            .foregroundColor(userLikes == 0 ? .gray : .red)
 //                            .onTapGesture {
-//                                if userLikes {
-//                                    nvm.removeLike(token: lvm.token, ownerId: ownerId, itemId: postId) { result in
+//                                if userLikes == 1 {
+//                                    newsViewModel.removeLike(token: loginViewModel.token, ownerId: ownerId, itemId: postId) { result in
 //                                        switch result {
 //                                        case .success(let newLikes):
 //                                            likes = newLikes
-//                                            userLikes = false
+//                                            userLikes = 0
 //                                        case .failure(let error):
 //                                            print("Error removing like: \(error)")
 //                                        }
 //                                    }
 //                                } else {
-//                                    nvm.addLike(token: lvm.token, ownerId: ownerId, itemId: postId) { result in
+//                                    newsViewModel.addLike(token: loginViewModel.token, ownerId: ownerId, itemId: postId) { result in
 //                                        switch result {
 //                                        case .success(let newLikes):
 //                                            likes = newLikes
-//                                            userLikes = true
+//                                            userLikes = 1
 //                                        case .failure(let error):
 //                                            print("Error adding like: \(error)")
 //                                        }
@@ -165,7 +152,8 @@ struct NewsItemDetailView: View {
 
 #Preview {
     NewsItemDetailView(
-        loginViewModel: LoginViewModel(), 
+//        loginViewModel: LoginViewModel(), text: "qwerty", likes: 10, photoURLs: [], userLikes: 0, canLike: 1, ownerId: 100, postId: 200
+        loginViewModel: LoginViewModel(),
         newsItem: NewsItemModel(
             newsText: "qwerty",
             newsDate: "123-122-122",

@@ -155,38 +155,23 @@ class NewsViewModel: ObservableObject {
             "item_id": itemId,
             "v": "5.199"
         ]
-       
-        AF.request(url, method: .get, parameters: params)
-            .responseJSON { response in
-                print("Received response: \(response.value)")
+        
+        AF.request(url, method: .get, parameters: params).response { response in
+            print(response.result)
+            switch response.result {
+            case .success(let data):
+                do {
+                    let likeResponse = try JSONDecoder().decode(LikeResponse.self, from: data!)
+                    completion(.success(likeResponse.response.likes))
+                } catch {
+                    print("Error decoding response: \(error)")
+                    completion(.failure(error))
+                }
+            case .failure(let error):
+                print("Error removing like: \(error)")
+                completion(.failure(error))
             }
-        
-//        AF.request(url, method: .get, parameters: params)
-//                .responseDecodable(of: LikeResponse.self) { response in
-//                    switch response.result {
-//                    case .success(let likeResponse):
-//                        completion(.success(likeResponse.response.likes))
-//                    case .failure(let error):
-//                        print("Error adding like: \(error)")
-//                        completion(.failure(error))
-//                    }
-//                }
-        
-//        AF.request(url, method: .get, parameters: params).response { response in
-//            switch response.result {
-//            case .success(let data):
-//                do {
-//                    let likeResponse = try JSONDecoder().decode(LikeResponse.self, from: data!)
-//                    completion(.success(likeResponse.response.likes))
-//                } catch {
-//                    print("Error decoding response: \(error)")
-//                    completion(.failure(error))
-//                }
-//            case .failure(let error):
-//                print("Error removing like: \(error)")
-//                completion(.failure(error))
-//            }
-//        }
+        }
     }
     
     // Dislike function
