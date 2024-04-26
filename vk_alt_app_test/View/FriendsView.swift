@@ -14,15 +14,15 @@ struct FriendsView: View {
     @ObservedObject var fvm = FriendsViewModel()
     
     var body: some View {
-        VStack {
+        NavigationView {
             ScrollView(.vertical) {
                 LazyVStack {
                     ForEach(friends, id: \.self) { friend in
                         FriendItemView(firstName: friend.firstName, secondName: friend.lastName, photo: friend.photo)
                     }
                 }
-                .padding(10)
             }
+            .navigationTitle("Friends")
             .onAppear {
                 fvm.getFriends(token: lvm.token) { friends in
                     self.friends = friends

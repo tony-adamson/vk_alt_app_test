@@ -14,7 +14,7 @@ struct LoginView: View {
     var body: some View {
         if loginViewModel.isLogin {
             withAnimation(.easeInOut(duration: 0.8)) {
-                MainView(lvm: loginViewModel)
+                MainView(loginViewModel: loginViewModel)
                     .opacity(showMainView ? 1 : 0)
                     .onAppear {
                         showMainView = true

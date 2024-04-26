@@ -10,49 +10,166 @@ import Foundation
 import Foundation
 import Alamofire
 import UIKit
+import Combine
 
 class NewsViewModel: ObservableObject {
-    
+    @Published var newsItems: [NewsItemModel] = []
+    var cancellables = Set<AnyCancellable>()
+
     // Get news feed
-    func getNews(token: String, completion: @escaping ([Item], [Profile], [Groups], [String], [Int], [[String]], [Bool], [Bool], [Int], [Int]) -> ()) {
+    func getNews(token: String) {
         let url = "https://api.vk.com/method/newsfeed.get"
-        
-        let params: Parameters = [
+        let parameters: [String: Any] = [
             "access_token": token,
             "filters": "post",
             "count": 20,
             "v": "5.199"
         ]
-        
-        AF.request(url, method: .get, parameters: params).response { response in
-            switch response.result {
-            case .success(let data):
-                do {
-                    let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: data!)
-                    let items = newsResponse.response.items
-                    let dates = items.map { self.formatDate($0.date) }
-                    let profiles = newsResponse.response.profiles
-                    let groups = newsResponse.response.groups
-                    let likes = items.map { $0.likes.count }
-                    let photoURLs = items.map { self.getBestSizePhotoURLs(from: $0) }
-                    let userLikes = items.map { $0.likes.user_likes == 1 }
-                    let canLike = items.map { $0.likes.can_like == 1 }
-                    let ownerId = items.map { $0.source_id }
-                    let post_id = items.map { $0.post_id }
-                    completion(items, profiles, groups, dates, likes, photoURLs, userLikes, canLike, ownerId, post_id)
-                } catch {
-                    print("Error decoding response: \(error)")
-                    completion([], [], [], [], [], [], [], [], [], [])
+
+        AF.request(url, method: .get, parameters: parameters)
+            .publishDecodable(type: NewsResponse.self)
+            .compactMap { $0.value }
+            .map { $0.response }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    print("Error fetching news data: \(error)")
                 }
-            case .failure(let error):
-                print("Error fetching news data: \(error)")
-                completion([], [], [], [], [], [], [], [], [], [])
+            }, receiveValue: { [weak self] response in
+                self?.processNewsData(response: response)
+            })
+            .store(in: &cancellables)
+    }
+
+    // Преобразование полученных данных в агрегированную модель
+    private func processNewsData(response: Response) {
+        let items = response.items
+        let profiles = response.profiles
+        let groups = response.groups
+
+        newsItems = items.map { item in
+            let date = self.formatDate(item.date)
+            let photoURLs = self.getBestSizePhotoURLs(from: item)
+            let likesCount = item.likes.count
+            let repostsCount = item.reposts.count
+            let viewsCount = item.views.count
+            let canLike = item.likes.can_like
+            let userLikes = item.likes.user_likes
+            let ownerId = item.owner_id
+            let postId = item.post_id
+
+            if item.source_id > 0, let profile = profiles.first(where: { $0.id == item.source_id }) {
+                return NewsItemModel(
+                    newsText: item.text,
+                    newsDate: date,
+                    likesCount: likesCount,
+                    repostsCount: repostsCount,
+                    viewsCount: viewsCount,
+                    authorName: "\(profile.first_name) \(profile.last_name)",
+                    authorPhotoURL: profile.photo_50,
+                    photoURLs: photoURLs,
+                    canLike: canLike,
+                    userLikes: userLikes,
+                    ownerId: ownerId,
+                    postId: postId
+                )
+            } else if item.source_id < 0, let group = groups.first(where: { $0.id == abs(item.source_id) }) {
+                return NewsItemModel(
+                    newsText: item.text,
+                    newsDate: date,
+                    likesCount: likesCount,
+                    repostsCount: repostsCount,
+                    viewsCount: viewsCount,
+                    authorName: group.name,
+                    authorPhotoURL: group.photo_50,
+                    photoURLs: photoURLs,
+                    canLike: canLike,
+                    userLikes: userLikes,
+                    ownerId: ownerId,
+                    postId: postId
+                )
+            } else {
+                return NewsItemModel(
+                    newsText: item.text,
+                    newsDate: date,
+                    likesCount: likesCount,
+                    repostsCount: repostsCount,
+                    viewsCount: viewsCount,
+                    authorName: "Unknown",
+                    authorPhotoURL: "",
+                    photoURLs: photoURLs,
+                    canLike: canLike,
+                    userLikes: userLikes,
+                    ownerId: ownerId,
+                    postId: postId
+                )
+            }
+        }
+    }
+
+
+    private func formatDate(_ timestamp: Int) -> String {
+        let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd-MM-yyyy HH:mm"
+        return dateFormatter.string(from: date)
+    }
+
+    private func getBestSizePhotoURLs(from item: Item) -> [String] {
+        var urls: [String] = []
+        
+        let screenWidth = UIScreen.main.bounds.width
+
+        for attachment in item.attachments {
+            if let photo = attachment.photo {
+                let bestSize = getBestSize(for: photo.sizes, screenWidth: screenWidth)
+                urls.append(bestSize.url)
+            }
+        }
+        
+        return urls
+    }
+    
+    private func getBestSize(for sizes: [Sizes], screenWidth: CGFloat) -> Sizes {
+        let sortedSizes = sizes.sorted { $0.width > $1.width }
+        
+        for size in sortedSizes {
+            if CGFloat(size.width) >= screenWidth {
+                return size
+            }
+        }
+        return sortedSizes.first!
+    }
+    
+    func likeFunctionTest(token: String, ownerId: Int, itemId: Int, isLiked: Int) {
+        print("isLiked при нажатии - \(isLiked)")
+        
+        if isLiked == 0 {
+            addLike(token: token, ownerId: ownerId, itemId: itemId) { result in
+                switch result {
+                case .success(let success):
+                    print("Like added: \(success)")
+                case .failure(let failure):
+                    print("Error adding like: \(failure)")
+                }
+            }
+        } else {
+            removeLike(token: token, ownerId: ownerId, itemId: itemId) { result in
+                switch result {
+                case .success(let success):
+                    print("Like deleted: \(success)")
+                case .failure(let failure):
+                    print("Error deleting like: \(failure)")
+                }
             }
         }
     }
     
     // Add Like function
-    func addLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
+    private func addLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
         let url = "https://api.vk.com/method/likes.add"
         
         let params: Parameters = [
@@ -62,8 +179,9 @@ class NewsViewModel: ObservableObject {
             "item_id": itemId,
             "v": "5.199"
         ]
-       
+        
         AF.request(url, method: .get, parameters: params).response { response in
+            print(response.result)
             switch response.result {
             case .success(let data):
                 do {
@@ -74,14 +192,14 @@ class NewsViewModel: ObservableObject {
                     completion(.failure(error))
                 }
             case .failure(let error):
-                print("Error adding like: \(error)")
+                print("Error removing like: \(error)")
                 completion(.failure(error))
             }
         }
     }
     
     // Dislike function
-    func removeLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
+    private func removeLike(token: String, ownerId: Int, itemId: Int, completion: @escaping (Result<Int, Error>) -> ()) {
         let url = "https://api.vk.com/method/likes.delete"
         
         let params: Parameters = [
@@ -109,53 +227,4 @@ class NewsViewModel: ObservableObject {
         }
     }
     
-    private func formatDate(_ timestamp: Int) -> String {
-        let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy HH:mm"
-        return formatter.string(from: date)
-    }
-    
-    private func getBestSizePhotoURLs(from item: Item) -> [String] {
-        var urls: [String] = []
-        
-        let screenWidth = UIScreen.main.bounds.width
-
-        for attachment in item.attachments {
-            if let photo = attachment.photo {
-                let bestSize = getBestSize(for: photo.sizes, screenWidth: screenWidth)
-                urls.append(bestSize.url)
-            }
-        }
-        
-        return urls
-    }
-    
-    private func getBestSize(for sizes: [Sizes], screenWidth: CGFloat) -> Sizes {
-        let sortedSizes = sizes.sorted { $0.width > $1.width }
-        
-        for size in sortedSizes {
-            if CGFloat(size.width) >= screenWidth {
-                return size
-            }
-        }
-        
-        return sortedSizes.first!
-    }
-    
-    // TODO: Unused function
-//    private func getSmallSizePhotoURLs(from item: Item) -> [String] {
-//        var urls: [String] = []
-//
-//        for attachment in item.attachments {
-//            if let photo = attachment.photo {
-//                for size in photo.sizes {
-//                    if size.type == "q" {
-//                        urls.append(size.url)
-//                    }
-//                }
-//            }
-//        }
-//        return urls
-//    }
 }

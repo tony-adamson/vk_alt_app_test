@@ -1,21 +1,20 @@
 //
-//  NewsItemDetailView.swift
+//  PostView.swift
 //  vk_alt_app_test
 //
-//  Created by Антон Адамсон on 18.04.2024.
+//  Created by Антон Адамсон on 12.04.2024.
 //
 
 import SwiftUI
 import SDWebImage
 import SDWebImageSwiftUI
 
-struct NewsItemDetailView: View {
+struct NewsItemView: View {
     @ObservedObject var loginViewModel: LoginViewModel
-    @StateObject var newsViewModel = NewsViewModel()
     @ObservedObject var newsItem: NewsItemModel
     
     var body: some View {
-        ScrollView(.vertical) {
+        NavigationLink(destination: NewsItemDetailView(loginViewModel: loginViewModel, newsItem: newsItem)) {
             VStack(alignment: .leading, spacing: 16) {
                 // up info block
                 HStack {
@@ -39,40 +38,10 @@ struct NewsItemDetailView: View {
                 Text(newsItem.newsText)
                     .multilineTextAlignment(.leading)
                 
-                // Block with photo
-                if !newsItem.photoURLs.isEmpty {
-                    ForEach(newsItem.photoURLs, id: \.self) { url in
-                        WebImage(url: URL(string: url))
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: .infinity)
-                    }
-                }
-                
-                
                 //Block with additional info
                 HStack {
                     Image(systemName: newsItem.userLikes == 0 ? "heart" : "heart.circle.fill")
                         .foregroundColor(newsItem.userLikes == 0 ? .gray : .red)
-                        .onTapGesture {
-                            if newsItem.userLikes == 0 {
-                                newsViewModel.likeFunctionTest(
-                                    token: loginViewModel.token,
-                                    ownerId: newsItem.ownerId,
-                                    itemId: newsItem.postId,
-                                    isLiked: newsItem.userLikes)
-                                newsItem.userLikes = 1
-                                newsItem.likesCount += 1
-                            } else {
-                                newsViewModel.likeFunctionTest(
-                                    token: loginViewModel.token,
-                                    ownerId: newsItem.ownerId,
-                                    itemId: newsItem.postId,
-                                    isLiked: newsItem.userLikes)
-                                newsItem.userLikes = 0
-                                newsItem.likesCount -= 1
-                            }
-                        }
                     Text("\(newsItem.likesCount)")
                     
                     Image(systemName: "repeat")
@@ -88,14 +57,14 @@ struct NewsItemDetailView: View {
             .padding()
             .background(.green.opacity(0.1))
             .foregroundStyle(.black)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
         }
-        .scrollIndicators(.hidden)
         .padding()
     }
 }
 
 #Preview {
-    NewsItemDetailView(
+    NewsItemView(
         loginViewModel: LoginViewModel(),
         newsItem: NewsItemModel(
             newsText: "qwerty",
@@ -107,9 +76,10 @@ struct NewsItemDetailView: View {
             authorPhotoURL: "",
             photoURLs: [],
             canLike: 1,
-            userLikes: 0,
+            userLikes: 10,
             ownerId: 100,
             postId: 200
         )
     )
 }
+

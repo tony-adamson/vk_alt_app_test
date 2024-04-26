@@ -20,19 +20,19 @@ struct FriendItemView: View {
                 .resizable()
                 .frame(width: 50, height: 50)
                 .clipShape(Circle())
-                .padding(.vertical, 16)
-                .padding(.leading, 16)
             VStack(alignment: .leading) {
                 Text(firstName)
-                    .font(.system(size: 18, weight: .black))
+                    .font(.title3)
                     .padding(.bottom, 2)
                 Text(secondName)
+                    .font(.subheadline)
             }
         }
+        .padding()
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.tint)
+        .background(.green.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 16))
-        .padding(.bottom, 10)
+        .padding()
     }
 }
 
